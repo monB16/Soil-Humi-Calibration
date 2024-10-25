@@ -6,6 +6,7 @@
 #include <WiFi.h>
 #include <NTPClient.h>
 #include <WiFiUdp.h>
+#include "secrets.h"
 
 // Credenciales de la red Wi-Fi
 const char* ssid     = "Tu_SSID";
