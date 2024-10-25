@@ -2,19 +2,8 @@
 // Autor: [Tu Nombre]
 // Fecha: [Fecha Actual]
 
-// Librerías necesarias
-#include <WiFi.h>
-#include <NTPClient.h>
-#include <WiFiUdp.h>
-#include "secrets.h"
-
-// Credenciales de la red Wi-Fi
-const char* ssid     = "Tu_SSID";
-const char* password = "Tu_Contraseña";
-
-// Configuración del cliente NTP
-WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP, "pool.ntp.org", 0, 60000); // Sin zona horaria, actualiza cada minuto
+#include <Arduino.h>
+//#include "secrets.h"
 
 // Número de sensores conectados
 const int numSensores = 7;
@@ -33,68 +22,27 @@ int valoresSensores[numSensores];
 unsigned long tiempoAnterior = 0;
 const unsigned long intervalo = 500; // Intervalo de X segundos
 
-// Función para conectar a la red Wi-Fi
-void conectarWiFi() {
-  Serial.print("Conectando a ");
-  Serial.println(ssid);
-  WiFi.begin(ssid, password);
-
-  int intentos = 0;
-  while (WiFi.status() != WL_CONNECTED && intentos < 20) {
-    delay(500);
-    Serial.print(".");
-    intentos++;
-  }
-
-  if (WiFi.status() == WL_CONNECTED) {
-    Serial.println("\nConexión Wi-Fi exitosa");
-    Serial.print("Dirección IP: ");
-    Serial.println(WiFi.localIP());
-  } else {
-    Serial.println("\nNo se pudo conectar a la red Wi-Fi");
-  }
-}
-
 void setup() {
   // Iniciar comunicación serial a 115200 baudios
   Serial.begin(115200);
 
   // Configurar la resolución del ADC a 12 bits (0 - 4095)
   analogReadResolution(12);
-
-  // Conectar a la red Wi-Fi
-  conectarWiFi();
-
-  // Iniciar el cliente NTP
-  timeClient.begin();
-
-  // Esperar a que se sincronice la hora
-  while(!timeClient.update()) {
-    timeClient.forceUpdate();
-  }
+  
 }
 
 void loop() {
   unsigned long tiempoActual = millis();
 
-  // Actualizar la hora cada minuto
-  if (!timeClient.update()) {
-    timeClient.forceUpdate();
-  }
-
   if (tiempoActual - tiempoAnterior >= intervalo) {
     tiempoAnterior = tiempoActual;
 
-    // Obtener la hora actual
-    String horaActual = timeClient.getFormattedTime();
-
+    
     // Leer y mostrar los valores de cada sensor
     for (int i = 0; i < numSensores; i++) {
       valoresSensores[i] = analogRead(pinesSensores[i]);
 
-      // Mostrar el número de sensor, su valor leído y la hora en el Monitor Serial
-      Serial.print("Hora: ");
-      Serial.print(horaActual);
+     
       Serial.print(" - Sensor ");
       Serial.print(i + 1);
       Serial.print(": ");
