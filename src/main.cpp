@@ -9,7 +9,7 @@
 const int numSensores = 7;
 
 // Pines analógicos donde están conectados los sensores
-const int pinesSensores[numSensores] = {34, 35, 32, 33, 25, 26, 39};
+const int pinesSensores[numSensores] = {36, 35, 32, 33, 25, 26, 27};
 
 // Arreglo para almacenar las lecturas de los sensores
 int valoresSensores[numSensores];
