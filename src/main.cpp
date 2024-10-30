@@ -9,7 +9,7 @@
 const int numSensores = 7;
 
 // Pines analógicos donde están conectados los sensores
-const int pinesSensores[numSensores] = {36, 35, 32, 33, 25, 26, 27};
+const int pinesSensores[numSensores] = {36, 35, 32, 33, 25, 26, 2};
 
 // Arreglo para almacenar las lecturas de los sensores
 int valoresSensores[numSensores];
@@ -20,7 +20,7 @@ int valoresSensores[numSensores];
 
 // Variables para el control del tiempo sin usar funciones bloqueantes
 unsigned long tiempoAnterior = 0;
-const unsigned long intervalo = 500; // Intervalo de X segundos
+const unsigned long intervalo = 2000; // Intervalo de X segundos
 
 void setup() {
   // Iniciar comunicación serial a 115200 baudios
