@@ -6,10 +6,10 @@
 //#include "secrets.h"
 
 // Número de sensores conectados
-const int numSensores = 7;
+const int numSensores = 5;
 
 // Pines analógicos donde están conectados los sensores
-const int pinesSensores[numSensores] = {36, 35, 32, 33, 25, 26, 2};
+const int pinesSensores[numSensores] = {36, 32, 33, 25, 26};
 
 // Arreglo para almacenar las lecturas de los sensores
 int valoresSensores[numSensores];
