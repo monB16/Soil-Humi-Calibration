@@ -2,6 +2,8 @@
 // Autor: [Tu Nombre]
 // Fecha: [Fecha Actual]
 
+// ** ESP32 tiene dos ADC. Usar los pines del ADC 1 si se utiliza el Wi-Fi, ya que  el ADC2 comparte pines con el WIfi. 
+// Pines ADC1: 32 a 29. 
 #include <Arduino.h>
 //#include "secrets.h"
 
@@ -28,6 +30,12 @@ void setup() {
 
   // Configurar la resolución del ADC a 12 bits (0 - 4095)
   analogReadResolution(12);
+
+  //analogSetPinAttenuation(pin, ADC_11db); // atenuación modifica el rango de voltaje que el ADC puede medir. Establece la atenuación para un pin específico
+//analogSetCycles(64); // Valores entre 1 y 255. Aumentar el número de ciclos para reducir el ruido. 
+//analogSetSamples(8); // Valores entre 1 y 255.  Incrementar el número de muestras para mejorar la sensibilidad.
+//analogSetClockDiv(1); // Valores entre 1 y 255.  Puedes experimentar con este valor para reducir el ruido. Un valor mayor reduce la velocidad de muestreo.
+
   
 }
 
